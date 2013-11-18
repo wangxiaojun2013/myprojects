@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--******************************
+本文件用于table变量的属性自定义
+ 强烈提醒: 
+ 1.如果你不想自定义配置,可以删除整个文件或是其中几列, 有定义的列才读自定义配置,没有定义的读数据库.不用一一对应
+ 2.你可以自由添加要自定义的属性，只要Table.java有set方法，并不限下面属性
+ ***********************************-->
+ 
+<!-- 
+<table sqlName="数据库表名" className="类名称" tableAlias="表的别名">
+	<column sqlName="数据库列名" columnAlias="列的别名" javaType="自定义javaType"
+	unique="是否唯一性约束" nullable="是否可以为空" pk="是否主键,在表没有主键的情况下,可以指定一个代理主键" 
+	updatable="是否可以更新" insertable="是否插入"	
+	enumString="枚举值,以分号分隔,示例值:M(1,男);F(0,女) 或者是:M(男);F(女)" 
+	enumClassName="如果枚举有值,生成的类名称将是这个,没有枚举值，该配置无用.示例值:Sex"
+	hibernateValidatorExprssion="HibernateValidator表达式: @NotNull @Min(10) @Pattern(regex=, flag=)"
+	/>
+</table>
+ -->
+<table sqlName="goods_set_type" className="GoodsSetType" tableAlias="产品配置-产品类型表（修改分类时候，不能修改所属父分类）" >
+
+	<column sqlName="goods_type_id" columnAlias="产品类型id" javaType="Long" 
+		unique="true" nullable="false" pk="true"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="GoodsTypeIdEnum"
+		hibernateValidatorExprssion=""
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="father_goods_type_id" columnAlias="上级产品类型id" javaType="Long" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="FatherGoodsTypeIdEnum"
+		hibernateValidatorExprssion=""
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="level" columnAlias="当前层级   0 表示 1级   1表示2级   依次类推" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="LevelEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="goods_type_name" columnAlias="产品类型名称" javaType="String" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="GoodsTypeNameEnum"
+		hibernateValidatorExprssion="@Length(max=100)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="goods_type_url" columnAlias="产品类型url(URL中要将此提现出来)" javaType="String" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="GoodsTypeUrlEnum"
+		hibernateValidatorExprssion="@Length(max=500)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="goods_type_remark" columnAlias="产品类型备注" javaType="String" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="GoodsTypeRemarkEnum"
+		hibernateValidatorExprssion="@Length(max=2147483647)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="sort_sequence" columnAlias="排序序号" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="SortSequenceEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="end_type_flag" columnAlias="是否终点类型（0：否  1：是）（所有的产品在录入时候，必须选择到终点类型）" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="EndTypeFlagEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="front_delete_flag" columnAlias="前台是否删除（0：否  1：是）" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="FrontDeleteFlagEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="behind_disable_flag" columnAlias="后台是否删除（0：否  1：是）（删除前先将后台禁用，等待该分类下的产品都下架后，再将产品类型删除；每次上架前要检查产品类型是否有效或者后台被禁用。）" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="BehindDisableFlagEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="home_flag" columnAlias="是否有上门费（0：否  1：是）（终点类型时候，此字段有效）" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="HomeFlagEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="server_flow" columnAlias="服务流量费率（例如输入50，代表千分之50）" javaType="Integer" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="ServerFlowEnum"
+		hibernateValidatorExprssion="@Max(32767)"
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="min_extra_flow" columnAlias="最小额外流量费" javaType="Long" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="MinExtraFlowEnum"
+		hibernateValidatorExprssion=""
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="max_extra_flow" columnAlias="最大额外流量费" javaType="Long" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="MaxExtraFlowEnum"
+		hibernateValidatorExprssion=""
+		hasOne="" hasMany=""
+	/>
+
+	<column sqlName="ensure" columnAlias="保证金" javaType="Long" 
+		unique="false" nullable="true" pk="false"
+		updatable="true" insertable="true"
+		enumString="" enumClassName="EnsureEnum"
+		hibernateValidatorExprssion=""
+		hasOne="" hasMany=""
+	/>
+
+</table>

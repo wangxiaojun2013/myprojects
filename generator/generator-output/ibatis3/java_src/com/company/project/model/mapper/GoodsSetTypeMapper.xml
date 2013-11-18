@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="GoodsSetType">
+
+	<resultMap id="RM.GoodsSetType" type="com.company.project.model.GoodsSetType">
+        <result property="goodsTypeId" column="goods_type_id"/>
+        <result property="fatherGoodsTypeId" column="father_goods_type_id"/>
+        <result property="level" column="level"/>
+        <result property="goodsTypeName" column="goods_type_name"/>
+        <result property="goodsTypeUrl" column="goods_type_url"/>
+        <result property="goodsTypeRemark" column="goods_type_remark"/>
+        <result property="sortSequence" column="sort_sequence"/>
+        <result property="endTypeFlag" column="end_type_flag"/>
+        <result property="frontDeleteFlag" column="front_delete_flag"/>
+        <result property="behindDisableFlag" column="behind_disable_flag"/>
+        <result property="homeFlag" column="home_flag"/>
+        <result property="serverFlow" column="server_flow"/>
+        <result property="minExtraFlow" column="min_extra_flow"/>
+        <result property="maxExtraFlow" column="max_extra_flow"/>
+        <result property="ensure" column="ensure"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="GoodsSetType.columns">
+	    <![CDATA[
+		goods_type_id,father_goods_type_id,level,goods_type_name,goods_type_url,goods_type_remark,sort_sequence,end_type_flag,front_delete_flag,behind_disable_flag,home_flag,server_flow,min_extra_flow,max_extra_flow,ensure
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="GoodsSetType.insert" useGeneratedKeys="true" keyProperty="goodsTypeId">
+    <![CDATA[
+        INSERT INTO goods_set_type (
+        	goods_type_id ,
+        	father_goods_type_id ,
+        	level ,
+        	goods_type_name ,
+        	goods_type_url ,
+        	goods_type_remark ,
+        	sort_sequence ,
+        	end_type_flag ,
+        	front_delete_flag ,
+        	behind_disable_flag ,
+        	home_flag ,
+        	server_flow ,
+        	min_extra_flow ,
+        	max_extra_flow ,
+        	ensure 
+        ) VALUES (
+        	#{goodsTypeId} ,
+        	#{fatherGoodsTypeId} ,
+        	#{level} ,
+        	#{goodsTypeName} ,
+        	#{goodsTypeUrl} ,
+        	#{goodsTypeRemark} ,
+        	#{sortSequence} ,
+        	#{endTypeFlag} ,
+        	#{frontDeleteFlag} ,
+        	#{behindDisableFlag} ,
+        	#{homeFlag} ,
+        	#{serverFlow} ,
+        	#{minExtraFlow} ,
+        	#{maxExtraFlow} ,
+        	#{ensure} 
+        )
+    ]]>
+		<!--	
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="GoodsSetType.update" >
+    <![CDATA[
+        UPDATE goods_set_type SET
+	        father_goods_type_id = #{fatherGoodsTypeId} ,
+	        level = #{level} ,
+	        goods_type_name = #{goodsTypeName} ,
+	        goods_type_url = #{goodsTypeUrl} ,
+	        goods_type_remark = #{goodsTypeRemark} ,
+	        sort_sequence = #{sortSequence} ,
+	        end_type_flag = #{endTypeFlag} ,
+	        front_delete_flag = #{frontDeleteFlag} ,
+	        behind_disable_flag = #{behindDisableFlag} ,
+	        home_flag = #{homeFlag} ,
+	        server_flow = #{serverFlow} ,
+	        min_extra_flow = #{minExtraFlow} ,
+	        max_extra_flow = #{maxExtraFlow} ,
+	        ensure = #{ensure} 
+        WHERE 
+	        goods_type_id = #{goodsTypeId} 
+    ]]>
+	</update>
+
+    <delete id="GoodsSetType.delete">
+    <![CDATA[
+        DELETE FROM goods_set_type WHERE
+        goods_type_id = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="GoodsSetType.getById" resultMap="RM.GoodsSetType">
+		SELECT <include refid="GoodsSetType.columns" />
+	    <![CDATA[
+		    FROM goods_set_type 
+	        WHERE 
+		        goods_type_id = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="GoodsSetType.findPage.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>	      				
+	       <if test="@Ognl@isNotEmpty(goodsTypeId)">
+				AND goods_type_id = #{goodsTypeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(fatherGoodsTypeId)">
+				AND father_goods_type_id = #{fatherGoodsTypeId}
+			</if>
+	       <if test="@Ognl@isNotEmpty(level)">
+				AND level = #{level}
+			</if>
+	       <if test="@Ognl@isNotEmpty(goodsTypeName)">
+				AND goods_type_name = #{goodsTypeName}
+			</if>
+	       <if test="@Ognl@isNotEmpty(goodsTypeUrl)">
+				AND goods_type_url = #{goodsTypeUrl}
+			</if>
+	       <if test="@Ognl@isNotEmpty(goodsTypeRemark)">
+				AND goods_type_remark = #{goodsTypeRemark}
+			</if>
+	       <if test="@Ognl@isNotEmpty(sortSequence)">
+				AND sort_sequence = #{sortSequence}
+			</if>
+	       <if test="@Ognl@isNotEmpty(endTypeFlag)">
+				AND end_type_flag = #{endTypeFlag}
+			</if>
+	       <if test="@Ognl@isNotEmpty(frontDeleteFlag)">
+				AND front_delete_flag = #{frontDeleteFlag}
+			</if>
+	       <if test="@Ognl@isNotEmpty(behindDisableFlag)">
+				AND behind_disable_flag = #{behindDisableFlag}
+			</if>
+	       <if test="@Ognl@isNotEmpty(homeFlag)">
+				AND home_flag = #{homeFlag}
+			</if>
+	       <if test="@Ognl@isNotEmpty(serverFlow)">
+				AND server_flow = #{serverFlow}
+			</if>
+	       <if test="@Ognl@isNotEmpty(minExtraFlow)">
+				AND min_extra_flow = #{minExtraFlow}
+			</if>
+	       <if test="@Ognl@isNotEmpty(maxExtraFlow)">
+				AND max_extra_flow = #{maxExtraFlow}
+			</if>
+	       <if test="@Ognl@isNotEmpty(ensure)">
+				AND ensure = #{ensure}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="GoodsSetType.findPage.count" resultType="long">
+        SELECT count(*) FROM goods_set_type 
+		<include refid="GoodsSetType.findPage.where"/>    
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="GoodsSetType.findPage" resultMap="RM.GoodsSetType">
+    	SELECT <include refid="GoodsSetType.columns" />
+	    FROM goods_set_type 
+		<include refid="GoodsSetType.findPage.where"/>
+		
+		<if test="@Ognl@isNotEmpty(sortColumns)">
+			ORDER BY ${sortColumns}
+		</if>
+    </select>
+
+	
+</mapper>
+

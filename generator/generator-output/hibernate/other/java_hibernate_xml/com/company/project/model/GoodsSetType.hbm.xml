@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.company.project.model">
+    <class name="GoodsSetType" table="goods_set_type">
+
+        <id name="goodsTypeId" column="goods_type_id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+		
+		
+		
+		<property 
+			name="fatherGoodsTypeId" 
+			column="father_goods_type_id" 
+			update="true"
+            insert="true"
+            type="java.lang.Long"
+			not-null="false" 
+			unique="false" 
+			length="19"/>
+		
+		<property 
+			name="level" 
+			column="level" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="goodsTypeName" 
+			column="goods_type_name" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="false" 
+			unique="false" 
+			length="100"/>
+		
+		<property 
+			name="goodsTypeUrl" 
+			column="goods_type_url" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="false" 
+			unique="false" 
+			length="500"/>
+		
+		<property 
+			name="goodsTypeRemark" 
+			column="goods_type_remark" 
+			update="true"
+            insert="true"
+            type="java.lang.String"
+			not-null="false" 
+			unique="false" 
+			length="2147483647"/>
+		
+		<property 
+			name="sortSequence" 
+			column="sort_sequence" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="endTypeFlag" 
+			column="end_type_flag" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="frontDeleteFlag" 
+			column="front_delete_flag" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="behindDisableFlag" 
+			column="behind_disable_flag" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="homeFlag" 
+			column="home_flag" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="serverFlow" 
+			column="server_flow" 
+			update="true"
+            insert="true"
+            type="Integer"
+			not-null="false" 
+			unique="false" 
+			length="5"/>
+		
+		<property 
+			name="minExtraFlow" 
+			column="min_extra_flow" 
+			update="true"
+            insert="true"
+            type="java.lang.Long"
+			not-null="false" 
+			unique="false" 
+			length="19"/>
+		
+		<property 
+			name="maxExtraFlow" 
+			column="max_extra_flow" 
+			update="true"
+            insert="true"
+            type="java.lang.Long"
+			not-null="false" 
+			unique="false" 
+			length="19"/>
+		
+		<property 
+			name="ensure" 
+			column="ensure" 
+			update="true"
+            insert="true"
+            type="java.lang.Long"
+			not-null="false" 
+			unique="false" 
+			length="19"/>
+		
+		<!-- One-To-Many attributes -->
+
+		<!-- Many-To-One attributes -->
+
+    </class>
+</hibernate-mapping>
+
